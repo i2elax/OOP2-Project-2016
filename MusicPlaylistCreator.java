@@ -3,16 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 	public class MusicPlaylistCreator extends JFrame implements ActionListener{ 
-		private JFrame MainWindow = new JFrame();
-		private JFrame LoginWindow = new JFrame();
-		private JFrame RegisterSongs = new JFrame();
 		
-		private JButton ViewPlaylistButton;
-		private JButton CreatePlaylistButton; 
-		private JTextField SongName; 
-		private JTextField ArtistName;
-		
-	
 		JMenu FileMenu;
 		JMenu EditMenu; 
 		JLabel response; 
@@ -48,24 +39,6 @@ import java.awt.event.*;
 				
 			}
 	
-					 public void actionPerformed(ActionEvent event) {
-        				String  menuName;
-        						menuName = event.getActionCommand();
-        					
-        					 if (menuName.equals("Quit")) {
-           						 System.exit(0);
-        					 	} 
-							 
-							 if (menuName.equals("Login")){ 
-							 	 setVisible(true);
-							 }
-							 
-							 else {
-							 	response.setText("Menu Item" + menuName + "is selected.");
-							 }
-							}
-							
-	
 						private void createFileMenu(){
 							JMenuItem item; 
 							FileMenu = new JMenu ("File"); 
@@ -99,33 +72,23 @@ import java.awt.event.*;
 							
 						}
 	
-					  private void LoginWindow(){
-					  	 Container cPane;
-						 setTitle("Login");
-						 setSize(300,200); 
-						 setDefaultCloseOperation(EXIT_ON_CLOSE);
-				
-						 cPane = getContentPane();
-						 cPane.setLayout(new FlowLayout());
-				
-						 createFileMenu(); 
-						 createEditMenu();
-				
-						 JMenuBar menuBar = new JMenuBar();
-						 setJMenuBar(menuBar); 
-						 menuBar.setBackground(Color.white);
-						 menuBar.add(FileMenu); 
-						 menuBar.add(EditMenu);
-				
-						 response = new JLabel("Welcome My Music Playlist Creator");
-        				 response.setSize(250, 250);
-        				 cPane.add(response);
-        				 setVisible(false);
-        				 
-        				 
-
-					  	
-					  }	
-	
-	} 
+						
+} 
+						public void actionPerformed(ActionEvent event) {
+									String  menuName;
+									menuName = event.getActionCommand();
+			
+									if (menuName.equals("Quit")) {
+									    System.exit(0);
+																 } 
+			 
+									if (menuName.equals("Login")){ 
+			 	 setVisible(true);
+			 }
+			 
+			 else {
+			 	response.setText("Menu Item" + menuName + "is selected.");
+			 }
+			}
+						
 		

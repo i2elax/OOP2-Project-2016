@@ -2,13 +2,14 @@ import javax.swing.*;
 import java.awt.*; 
 import java.awt.event.*;
 
-	public class MusicPlaylist extends JFrame implements ActionListener
+	public class MusicPlaylist extends JFrame
 	{ 
+		private JTextField welcome; 
 		JMenu FileMenu; 
-		JMenu EditMenu;
 		JLabel Response;
+		JButton LButton;
 		
-			public static void main (String args [])
+		public static void main(String[] args)
 			{ 
 				MusicPlaylist frame = new MusicPlaylist();
 				frame.setVisible(true); 
@@ -19,50 +20,54 @@ import java.awt.event.*;
 					Container ConPane; 
 					setTitle("Music Playlist Creator"); 
 					setSize(300,300); 
-					setDeafultCloseOperation(EXIT_ON_CLOSE);
+					setDefaultCloseOperation(EXIT_ON_CLOSE);
 					
 					ConPane=getContentPane();
 					ConPane.setLayout(new FlowLayout());
 					
 					createFileMenu(); 
-					createEditMenu();
+					
 					
 					JMenuBar menuBar = new JMenuBar();
 					setJMenuBar(menuBar);
 					menuBar.setBackground(Color.white); 
 					menuBar.add(FileMenu);
-					menuBar.add(EditMenu);
+					
+					welcome = new JTextField(10);
+					add(welcome);
+					
+					thehandler handler = new thehandler(); 
+					welcome.addActionListener(handler); 
+					
 						
 				}
 				
-				   private void createFileMenu()
+				   private class thehandler implements ActionListener 
+				   { 
+					   public void actionPerformed(ActionEvent event)
+					   { 
+						 String string = ""; 
+						 
+						 if(event.getSource()==welcome)
+							 string=String.format("field 1: %s", event.getActionCommand()); 
+					   }
+				   }
+					
+				
+				
+				
+				
+						private void createFileMenu()
 				   { 
 				   	
 				   	JMenuItem FileItem; 
-				   	FileMenu = new JMenu("File"); 
-				   	FileItem = new JMenuItem("Register");
-				   	FileMenu.add(FileItem);
-				   	 
-				   	FileItem = new JMenuItem("Login");
-				   	FileMenu.add(FileItem);
-				   	
 				   	FileItem = new JMenuItem("Quit");
 				   	FileMenu.add(FileItem);
 				   
 				   }
 	
-				  private void createFileMenu()
-				   { 
-				   	
-				   	JMenuItem EditItem; 
-				   	EditMenu = new JMenu("Edit"); 
-				   	EditItem = new JMenuItem("Create Playlist");
-				   	EditMenu.add(EditItem);
-				   	 
-				   	EditItem = new JMenuItem("View Playlist");
-				   	EditMenu.add(FileItem);
-				   	
 				  
-				   }
-	
+				   	
+				   
+			
 	}
