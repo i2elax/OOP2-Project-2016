@@ -15,6 +15,11 @@ public class RegisterWindow extends JFrame
 	
 	public static ArrayList<saveUser> Userlist = new ArrayList<saveUser>();
 	
+	public ArrayList <saveUser> getList()
+	{ 
+		return Userlist;
+	}
+	
 	public void SaveUser() throws Exception 
 	{ 
 		File usersdata = new File("usersdata.dat"); 

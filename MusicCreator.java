@@ -37,6 +37,7 @@ public class MusicCreator extends JFrame
 			{ 
 				LoginWindow loginwindow = new LoginWindow();
 				loginwindow.setVisible(true);
+				setVisible(false); 
 				
 				
 			}

@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -10,16 +12,20 @@ public class LoginWindow extends JFrame
 	JTextField userName; 
 	JPasswordField userPass;
 	JButton login;
-
-	/*public void Loaduser() throws Exception 
-	{ 
+	
+	
+/*
+	public void Loaduser() throws Exception 
+	{ 	
+		RegisterWindow = new RegisterWindow();
+		ArrayList<saveUser> Userlist = RegisterWindow.getList();
 		File usersdata = new File("usersdata.dat"); 
 		FileInputStream fileIn = new FileInputStream(usersdata); 
 		ObjectInputStream objectIn = new ObjectInputStream(fileIn);
 		
 		Userlist = (ArrayList<saveUser>) objectIn.readObject(); 
 		objectIn.close(); 
-	}*/
+	}*/ 
 		
 	public LoginWindow()
 		{ 
@@ -40,9 +46,25 @@ public class LoginWindow extends JFrame
 			login = new JButton("login");
 			add(login);
 			
+			loginbuttonhandler OpenMainWindow = new loginbuttonhandler();
+			login.addActionListener(OpenMainWindow);
+			
 			
 			
 			
 		}
+	private class loginbuttonhandler implements ActionListener
+	{ 
+		public void actionPerformed(ActionEvent registerEvent)
+		{ 
+			setVisible(false);
+			MainWindow mainwindow = new MainWindow();
+			mainwindow.setVisible(true);
+			
+			//splashwindow.setVisible(false);
+			 
+			
+		}
+	}
 	
 }
