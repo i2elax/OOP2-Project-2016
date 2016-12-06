@@ -22,19 +22,34 @@ public class MusicCreator extends JFrame
 			registerBtn = new JButton("Register"); 
 			add(registerBtn);
 
-			thehandler handler = new thehandler(); 
-			loginBtn.addActionListener(handler);
-			registerBtn.addActionListener(handler);
+			loginhandler Lhandler = new loginhandler(); 
+			loginBtn.addActionListener(Lhandler);
+			
+			registerhandler Rhandler = new registerhandler();
+			registerBtn.addActionListener(Rhandler);
+			
+			
 		}
 		
-		private class thehandler implements ActionListener
+		private class loginhandler implements ActionListener
 		{ 
 			public void actionPerformed(ActionEvent loginEvent)
 			{ 
 				LoginWindow loginwindow = new LoginWindow();
-				loginwindow.setVisible(true); 
+				loginwindow.setVisible(true);
 				
 				
 			}
 		}
+
+		private class registerhandler implements ActionListener
+		{ 
+			public void actionPerformed(ActionEvent registerEvent)
+			{ 
+				RegisterWindow regwindow = new RegisterWindow(); 
+				regwindow.setVisible(true);
+			}
+		}
+
+
 }

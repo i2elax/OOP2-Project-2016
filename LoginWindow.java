@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
+import java.util.ArrayList;
 
 public class LoginWindow extends JFrame 
 {
@@ -8,15 +10,24 @@ public class LoginWindow extends JFrame
 	JTextField userName; 
 	JPasswordField userPass;
 	JButton login;
-	 
-	
-		public LoginWindow()
+
+	/*public void Loaduser() throws Exception 
+	{ 
+		File usersdata = new File("usersdata.dat"); 
+		FileInputStream fileIn = new FileInputStream(usersdata); 
+		ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+		
+		Userlist = (ArrayList<saveUser>) objectIn.readObject(); 
+		objectIn.close(); 
+	}*/
+		
+	public LoginWindow()
 		{ 
 			super("Login"); 
 			setLayout(new FlowLayout()); 
 			setSize(300,300);
 			setLocationRelativeTo(null);
-			setDefaultCloseOperation(EXIT_ON_CLOSE); 
+			setDefaultCloseOperation(HIDE_ON_CLOSE); 
 			
 			loginMsg = new JLabel ("Username: ");
 			add(loginMsg);
