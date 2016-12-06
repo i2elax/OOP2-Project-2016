@@ -11,7 +11,7 @@ public class LoginWindow extends JFrame
 	JLabel passMsg; 
 	JTextField userName; 
 	JPasswordField userPass;
-	JButton login;
+	JButton login,back;
 	
 	
 /*
@@ -25,7 +25,7 @@ public class LoginWindow extends JFrame
 		
 		Userlist = (ArrayList<saveUser>) objectIn.readObject(); 
 		objectIn.close(); 
-	}*/ 
+	}*/  // can't get this working 
 		
 	public LoginWindow()
 		{ 
@@ -45,11 +45,14 @@ public class LoginWindow extends JFrame
 			add(userPass);
 			login = new JButton("login");
 			add(login);
+			back = new JButton("Back to Main Menu");
+			add(back);
 			
 			loginbuttonhandler OpenMainWindow = new loginbuttonhandler();
 			login.addActionListener(OpenMainWindow);
 			
-			
+			backbuttonhandler OpenMainMenu = new backbuttonhandler(); 
+			back.addActionListener(OpenMainMenu); 
 			
 			
 		}
@@ -59,12 +62,18 @@ public class LoginWindow extends JFrame
 		{ 
 			setVisible(false);
 			MainWindow mainwindow = new MainWindow();
-			mainwindow.setVisible(true);
-			
-			//splashwindow.setVisible(false);
-			 
-			
+			mainwindow.setVisible(true);	
 		}
 	}
 	
+	private class backbuttonhandler implements ActionListener
+	{ 
+		public void actionPerformed(ActionEvent registerEvent)
+		{ 
+			setVisible(false);
+			MusicCreator mainmenu = new MusicCreator();
+			mainmenu.setVisible(true);
+			mainmenu.setSize(300,300);
+		}
+	}
 }

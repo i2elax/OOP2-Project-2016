@@ -25,7 +25,7 @@ private String forename , surname , username , password , email;
 		
 		public void addRecords()
 			{ 
-				a.format(forename,surname,username,password,email); 
+				a.format("%S%S"); 
 			}
 
 		public void closeFile()

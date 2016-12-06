@@ -13,35 +13,35 @@ public class RegisterWindow extends JFrame
 	JTextField userName ,jtName, passWord, eMail;
 	JButton register;
 	
-	public static ArrayList<saveUser> Userlist = new ArrayList<saveUser>();
+	public static ArrayList<saveUser> Userlist = new ArrayList<saveUser>(); //Creates Arraylist called Userlist 
 	
-	public ArrayList <saveUser> getList()
+	public ArrayList <saveUser> getList() //Creates a getList method for access to UserList in another class
 	{ 
 		return Userlist;
 	}
 	
-	public void SaveUser() throws Exception 
+	public void SaveUser() throws Exception //creates save UserMethod 
 	{ 
-		File usersdata = new File("usersdata.dat"); 
-		FileOutputStream fileOut = new FileOutputStream(usersdata); 
-		ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+		File usersdata = new File("usersdata.dat"); //Creates Userdata.dat file
+		FileOutputStream fileOut = new FileOutputStream(usersdata); //File outputs to the file Userdata 
+		ObjectOutputStream objectOut = new ObjectOutputStream(fileOut); //Object outputs to the file output stream 
 		
-		objectOut.writeObject(Userlist);
-		objectOut.close(); 
+		objectOut.writeObject(Userlist); //writes the object Userlist which is an Array 
+		objectOut.close(); // closes the object
 	}
 
-	public RegisterWindow()
+	public RegisterWindow() 
 	{ 
-		super("Register"); 
-		setLayout(new FlowLayout()); 
-		setSize(300,300);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(HIDE_ON_CLOSE); 
+		super("Register"); //sets name of RegisterWindow as Super  
+		setLayout(new FlowLayout()); // sets layout 
+		setSize(300,300); //sets size 
+		setLocationRelativeTo(null); //sets location to center of screen 
+		setDefaultCloseOperation(HIDE_ON_CLOSE); //sets default close to hide  
 		
-		name = new JLabel ("Enter Name: ");
-		add(name);
-		jtName = new JTextField(10);
-		add(jtName);
+		name = new JLabel ("Enter Name: "); //creates new JLabel 
+		add(name); //adds JLabel 
+		jtName = new JTextField(10); //creates JTextField
+		add(jtName); //Adds JTextField 
 		
 		Uname = new JLabel ("Enter Desired Username: ");
 		add(Uname);
@@ -61,40 +61,40 @@ public class RegisterWindow extends JFrame
 		register = new JButton("Register");
 		add(register);
 		
-		registerhandler UserDataHandler = new registerhandler();
-		register.addActionListener(UserDataHandler);
+		registerhandler UserDataHandler = new registerhandler(); //Creates new registerhandler object 
+		register.addActionListener(UserDataHandler); //adds registerhandler to register button 
 		
 		
 		
 		
 	}
-	private class registerhandler implements ActionListener 
+	private class registerhandler implements ActionListener //creates registerhandler class and implements everything from ActionListener
 	{ 
-		public void actionPerformed(ActionEvent regEvent)
+		public void actionPerformed(ActionEvent regEvent) //adds action performed which is part of ActionListener 
 		{ 
-			String usernameAsString = userName.getText();
+			String usernameAsString = userName.getText(); //creates new String variable and makes it equals to the input on Username JTextfield. 
 			String passwordAsString = passWord.getText();
 			String nameAsString = jtName.getText(); 
 			String emailAsString = eMail.getText(); 
 			
-			saveUser user = new saveUser (usernameAsString,passwordAsString,nameAsString,emailAsString); 
+			saveUser user = new saveUser (usernameAsString,passwordAsString,nameAsString,emailAsString); //creates new saveUser object with parameters equals to Strings above 
 			
-				if(Userlist.size() == 0)
+				if(Userlist.size() == 0) 
 				{ 
-					Userlist.add(user);
+					Userlist.add(user); //userlist adds user 
 					
 					try
 					{
-						SaveUser();
+						SaveUser(); //executes saveUser method found in SaveUser.java 
 					}
 					
-					catch(Exception save)
+					catch(Exception save) //If saveuser doesn't work this is what executes. 
 					{ 
-						JOptionPane.showMessageDialog(null,"Sorry , Could not save your data","Error",JOptionPane.WARNING_MESSAGE);
+						JOptionPane.showMessageDialog(null,"Sorry , Could not save your data","Error",JOptionPane.WARNING_MESSAGE); //JOptionPane displays error 
 					}
 					
 					JOptionPane.showMessageDialog(null,"Success! Your Credentials have been saved","Welcome to Music Playlist Creator",JOptionPane.INFORMATION_MESSAGE);
-					setVisible(false);
+					setVisible(false); //else this is what shows. 
 				}
 				 
 				
