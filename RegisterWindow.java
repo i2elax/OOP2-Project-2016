@@ -12,29 +12,32 @@ public class RegisterWindow extends JFrame
 	JLabel name, Uname , Pword , Email; 
 	JTextField userName ,jtName, passWord, eMail;
 	JButton register;
+	char notation = '@';
+	String message = ""; 
+	int count = 0; 
 	
-	public static ArrayList<saveUser> Userlist = new ArrayList<saveUser>(); //Creates Arraylist called Userlist 
+		public static ArrayList<saveUser> Userlist = new ArrayList<saveUser>(); //Creates Arraylist called Userlist 
 	
-	public ArrayList <saveUser> getList() //Creates a getList method for access to UserList in another class
-	{ 
-		return Userlist;
-	}
+		public ArrayList <saveUser> getList() //Creates a getList method for access to UserList in another class
+			{ 
+				return Userlist;
+			}
 	
-	public void SaveUser() throws Exception //creates save UserMethod 
-	{ 
-		File usersdata = new File("usersdata.dat"); //Creates Userdata.dat file
-		FileOutputStream fileOut = new FileOutputStream(usersdata); //File outputs to the file Userdata 
-		ObjectOutputStream objectOut = new ObjectOutputStream(fileOut); //Object outputs to the file output stream 
+			public void SaveUser() throws Exception //creates save UserMethod 
+				{ 
+					File usersdata = new File("usersdata.dat"); //Creates Userdata.dat file
+					FileOutputStream fileOut = new FileOutputStream(usersdata); //File outputs to the file Userdata 
+					ObjectOutputStream objectOut = new ObjectOutputStream(fileOut); //Object outputs to the file output stream 
 		
-		objectOut.writeObject(Userlist); //writes the object Userlist which is an Array 
-		objectOut.close(); // closes the object
-	}
+					objectOut.writeObject(Userlist); //writes the object Userlist which is an Array 
+					objectOut.close(); // closes the object
+				}
 
 	public RegisterWindow() 
 	{ 
 		super("Register"); //sets name of RegisterWindow as Super  
 		setLayout(new FlowLayout()); // sets layout 
-		setSize(300,300); //sets size 
+		setSize(800,300); //sets size 
 		setLocationRelativeTo(null); //sets location to center of screen 
 		setDefaultCloseOperation(HIDE_ON_CLOSE); //sets default close to hide  
 		
@@ -61,43 +64,84 @@ public class RegisterWindow extends JFrame
 		register = new JButton("Register");
 		add(register);
 		
+		JPanel top = new JPanel();
+		JPanel center = new JPanel();
+		JPanel bottom = new JPanel(); 
+		
+		top.add(name);
+		top.add(jtName);
+		top.add(Email);
+		top.add(eMail);
+		center.add(Uname);
+		center.add(userName);
+		center.add(Pword);
+		center.add(passWord);
+		bottom.add(register);
+		
+		add(top, BorderLayout.NORTH); 
+		add(center, BorderLayout.CENTER); 
+		add(bottom,BorderLayout.SOUTH);
+		
 		registerhandler UserDataHandler = new registerhandler(); //Creates new registerhandler object 
 		register.addActionListener(UserDataHandler); //adds registerhandler to register button 
 		
-		
-		
-		
 	}
+	
 	private class registerhandler implements ActionListener //creates registerhandler class and implements everything from ActionListener
-	{ 
-		public void actionPerformed(ActionEvent regEvent) //adds action performed which is part of ActionListener 
 		{ 
+			public void actionPerformed(ActionEvent regEvent) //adds action performed which is part of ActionListener 
+		{ 
+			
 			String usernameAsString = userName.getText(); //creates new String variable and makes it equals to the input on Username JTextfield. 
 			String passwordAsString = passWord.getText();
 			String nameAsString = jtName.getText(); 
-			String emailAsString = eMail.getText(); 
+			String emailAsString = eMail.getText().toString(); 
 			
-			saveUser user = new saveUser (usernameAsString,passwordAsString,nameAsString,emailAsString); //creates new saveUser object with parameters equals to Strings above 
-			
-				if(Userlist.size() == 0) 
-				{ 
-					Userlist.add(user); //userlist adds user 
+			for(int i =0; i<emailAsString.length();i++)
+			{
+					if(emailAsString.charAt(i)==notation)
+				{
+						count++; 
+						message = "Yay Valid Email! "; 
 					
-					try
-					{
-						SaveUser(); //executes saveUser method found in SaveUser.java 
-					}
-					
-					catch(Exception save) //If saveuser doesn't work this is what executes. 
-					{ 
-						JOptionPane.showMessageDialog(null,"Sorry , Could not save your data","Error",JOptionPane.WARNING_MESSAGE); //JOptionPane displays error 
-					}
-					
-					JOptionPane.showMessageDialog(null,"Success! Your Credentials have been saved","Welcome to Music Playlist Creator",JOptionPane.INFORMATION_MESSAGE);
-					setVisible(false); //else this is what shows. 
-				}
-				 
+						if(count>=2)
+						{ 
+							message = "This is NOT a valid email , no email contains 2 @ signs";
+							userName.setText("");
+						}
+				} 
 				
+					else  
+					{ 
+						message = "This is NOT a valid email";
+						userName.setText(""); 
+					}
+					
+			}
+				
+				JOptionPane.showMessageDialog(null,message);
+			
+				saveUser user = new saveUser (usernameAsString,passwordAsString,nameAsString,emailAsString); //creates new saveUser object with parameters equals to Strings above 
+			
+					if(Userlist.size() == 0) 
+					{ 
+						Userlist.add(user); //userlist adds user 
+		
+						try
+							{
+								SaveUser(); //executes saveUser method found in SaveUser.java 
+							}
+		
+						catch(Exception save) //If saveuser doesn't work this is what executes. 
+							{ 
+								JOptionPane.showMessageDialog(null,"Sorry , Could not save your data","Error",JOptionPane.WARNING_MESSAGE); //JOptionPane displays error 
+							}
+		
+								JOptionPane.showMessageDialog(null,"Success! Your Credentials have been saved","Welcome to Music Playlist Creator",JOptionPane.INFORMATION_MESSAGE);
+									setVisible(false); //else this is what shows. 
+					}	
+				
+			
 		}
 	}
-}
+} 

@@ -2,8 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
-import java.util.ArrayList;
+
 
 public class LoginWindow extends JFrame 
 {
@@ -12,9 +11,8 @@ public class LoginWindow extends JFrame
 	JTextField userName; 
 	JPasswordField userPass;
 	JButton login,back;
-	
-	
-/*
+	 
+	/*
 	public void Loaduser() throws Exception 
 	{ 	
 		RegisterWindow = new RegisterWindow();
@@ -33,7 +31,7 @@ public class LoginWindow extends JFrame
 			setLayout(new FlowLayout()); 
 			setSize(300,300);
 			setLocationRelativeTo(null);
-			setDefaultCloseOperation(HIDE_ON_CLOSE); 
+			setDefaultCloseOperation(HIDE_ON_CLOSE);  
 			
 			loginMsg = new JLabel ("Username: ");
 			add(loginMsg);
@@ -48,6 +46,21 @@ public class LoginWindow extends JFrame
 			back = new JButton("Back to Main Menu");
 			add(back);
 			
+			JPanel top = new JPanel();
+			JPanel center = new JPanel();
+			JPanel bottom = new JPanel(); 
+			
+			top.add(loginMsg);
+			top.add(userName);
+			center.add(passMsg);
+			center.add(userPass);
+			bottom.add(login);
+			bottom.add(back);
+			
+			add(top, BorderLayout.NORTH); 
+			add(center, BorderLayout.CENTER); 
+			add(bottom,BorderLayout.SOUTH);
+			
 			loginbuttonhandler OpenMainWindow = new loginbuttonhandler();
 			login.addActionListener(OpenMainWindow);
 			
@@ -56,24 +69,24 @@ public class LoginWindow extends JFrame
 			
 			
 		}
-	private class loginbuttonhandler implements ActionListener
-	{ 
-		public void actionPerformed(ActionEvent registerEvent)
-		{ 
-			setVisible(false);
-			MainWindow mainwindow = new MainWindow();
-			mainwindow.setVisible(true);	
-		}
-	}
+			private class loginbuttonhandler implements ActionListener
+			{ 
+				public void actionPerformed(ActionEvent registerEvent)
+					{ 
+						setVisible(false);
+						MainWindow mainwindow = new MainWindow();
+						mainwindow.setVisible(true);	
+					}
+			}
 	
-	private class backbuttonhandler implements ActionListener
-	{ 
-		public void actionPerformed(ActionEvent registerEvent)
-		{ 
-			setVisible(false);
-			MusicCreator mainmenu = new MusicCreator();
-			mainmenu.setVisible(true);
-			mainmenu.setSize(300,300);
-		}
-	}
+			private class backbuttonhandler implements ActionListener
+			{ 
+				public void actionPerformed(ActionEvent registerEvent)
+					{ 
+						setVisible(false);
+						MusicCreator mainmenu = new MusicCreator();
+						mainmenu.setVisible(true);
+						mainmenu.setSize(300,300);
+					}
+			}
 }

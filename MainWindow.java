@@ -12,14 +12,14 @@ import javax.swing.*;
 
 public class MainWindow extends JFrame
 {
-	JLabel  Info; 
-	JButton createPlaylist;
+	JLabel  Info,Songs; 
+	private JButton PickSong;
 	
-	public void  SoundClipTest() {     /* music for eating a ball https://www.ntu.edu.sg/home/ehchua/programming/java/J8c_PlayingSound.html */
+	public void  SoundClipTest() { /* Used to play audio files  https://www.ntu.edu.sg/home/ehchua/programming/java/J8c_PlayingSound.html */
 
 		try {
 			// Open an audio input stream.
-			URL url = this.getClass().getClassLoader().getResource("cello.wav");
+			URL url = this.getClass().getClassLoader().getResource("boing.wav");
 			AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
 			// Get a sound clip resource.
 			Clip clip = AudioSystem.getClip();
@@ -34,32 +34,34 @@ public class MainWindow extends JFrame
 			e.printStackTrace();
 		}
 	}
-	public MainWindow()
-	{ 
-		super("Welcome to Playlist Creator"); 
-		setLayout(new FlowLayout()); 
-		setSize(800,800);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		
-		Info = new JLabel ("Click the button below to create a playlist");
-		add(Info); 
-		
-		createPlaylist = new JButton ("Create Playlist"); 
-		add(createPlaylist);
-		
-		createplaylisthandler gettingobjectsound = new createplaylisthandler(); 
-		createPlaylist.addActionListener(gettingobjectsound);
-	}
-		
-	private class createplaylisthandler implements ActionListener
-	{ 
-		public void actionPerformed(ActionEvent registerEvent)
+		public MainWindow()
 		{ 
-			
-			SoundClipTest(); 
-				
+			super("Random Song Picker"); 
+			setLayout(new FlowLayout()); 
+			setSize(300,300);
+			setLocationRelativeTo(null);
+			setDefaultCloseOperation(HIDE_ON_CLOSE);
+		
+			Info = new JLabel ("Click the button below to be Given a random song");
+			add(Info); 
+		
+			PickSong = new JButton ("Pick Me A Song"); 
+			add(PickSong);
+		
+		
+			createplaylisthandler gettingobjectsound = new createplaylisthandler(); 
+			PickSong.addActionListener(gettingobjectsound);
 		}
-	}
+		
+			private class createplaylisthandler implements ActionListener
+			{ 
+				public void actionPerformed(ActionEvent registerEvent)
+				{ 
+			
+					SoundClipTest();
+					SongsList LoadSongs = new SongsList();
+					LoadSongs.Songs();
+				}
+			}
 		
 }

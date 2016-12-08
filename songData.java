@@ -1,30 +1,31 @@
 import java.io.Serializable;
+import java.util.*;
+import java.io.*;
+
 
 public class songData implements Serializable {
-	private String Songname,username,password,email;
 	
-	public songData(String Songname)
-	{ 
-		this.Songname = Songname; 
+	private Random songpicker = new Random();
+	private String songschosen; 
+	private int counter; 
+	
+		public void createSongList() throws FileNotFoundException
+		{ 
+			Scanner songs = new Scanner(new File("songs.txt"));
+		
+			ArrayList<String> songList = new ArrayList<String>();
+		
+		
+			for(counter=0;counter<10;counter++)
+				{ 
 		 
-	}
-		public String getName()
-		{ 
-			return Songname; 
-		}
-		
-		public String getUsername()
-		{ 
-			return username; 
-		}
-		
-		public String getPassword()
-		{ 
-			return password; 
-		}
-		
-		public String getEmail()
-		{ 
-			return email;
-		}
-}
+					songs.hasNextLine(); 
+		 	
+					songList.add(songs.nextLine());
+	 
+					System.out.println(songList); 
+				} 
+	 
+					songs.close(); 
+		} 
+ } 
